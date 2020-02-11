@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { FormGroup, Input, Container } from './styles'
 
 interface IUserData {
   email: string;
@@ -16,33 +17,40 @@ const Login: React.FC = () => {
     console.log("asd");
   };
   return (
-    <div className="form-container">
-      <div className="form-login">
-        <form onSubmit={handleAuthUser}>
+    <FormGroup>
+
+
+      <form onSubmit={handleAuthUser}>
+        <Container>
           <label htmlFor="email">Email</label>
-          <input
+          <Input
             type="email"
             id="email"
             placeholder="Please, enter your email"
             name="email"
-            onChange={e => setUserData({ ...userData, email: e.target.value })}
+            onChange={(e: { target: { value: any; }; }) => setUserData({ ...userData, email: e.target.value })}
           />
-          <label htmlFor="password">Password</label>
-          <input
+        </Container>
+        <Container>
+          <label htmlFor="password">  Password</label>
+          <Input
             type="password"
             id="password"
             placeholder="Please, enter your password"
             name="password"
-            onChange={e =>
+            onChange={(e: { target: { value: any; }; }) =>
               setUserData({ ...userData, password: e.target.value })
             }
           />
-        </form>
-      </div>
+        </Container>
+
+
+      </form>
+
       <div className="new-account-container">
         <Link to={"/signin"} />
       </div>
-    </div>
+    </FormGroup>
   );
 };
 export default Login;
