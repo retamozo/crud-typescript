@@ -1,11 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
+import ProjectContext from '../../context/projects/projectContext'
 
 const Project = ({ projectData }: any) => {
-  const { name } = projectData;
+
+  interface ICurrenrtPoject {
+    currentProject: object[]
+    selectCurrentProjectFn: ICurrentAction
+  }
+  interface ICurrentAction {
+    (id: string): string
+  }
+  const projectSelected: ICurrenrtPoject = useContext(ProjectContext)
+  const { selectCurrentProjectFn } = projectSelected
+  const { projectName, id } = projectData;
+
+
+
+
   return (
-    <div>
-      <h3> {name} </h3>
-    </div>
+    <li>
+      <button type="button" className="btn btn-blank" onClick={() => selectCurrentProjectFn(id)} > {projectName} </button >
+    </li>
   );
 };
 export default Project;

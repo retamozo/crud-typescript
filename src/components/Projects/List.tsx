@@ -1,16 +1,27 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import Project from "./Project";
+import ProjectContext from "../../context/projects/projectContext";
 
-interface IProjectsList {
-  projects: Array<any>;
-}
+const List = () => {
+  interface IprojectData {
+    projectsData: Array<object>
+    getProjectsDataFn: () => Array<object>
+  }
 
-const List: React.FC<IProjectsList> = ({ projects }): any => {
+  const projectsDataFromContext: IprojectData = useContext(ProjectContext);
+
+  const { projectsData, getProjectsDataFn } = projectsDataFromContext;
+
+  useEffect(() => {
+    getProjectsDataFn()
+  }, [])
+  
+console.log(projectsData);
   return (
     <div>
       <h3>Your projects</h3>
       <ul>
-        {projects.map((project: any, i: any) => {
+        {projectsData.length > 0 && projectsData.map((project: any, i: any) => {
           return <Project key={i} projectData={project} />;
         })}
       </ul>
